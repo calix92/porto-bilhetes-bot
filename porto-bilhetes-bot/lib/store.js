@@ -3,8 +3,9 @@ import { SEEN_TTL_DAYS } from './config.js';
 // Fala com o Upstash Redis pela API REST (sem bibliotecas).
 // O Upstash ligado pelo Vercel pode criar KV_REST_API_* ou UPSTASH_REDIS_REST_*.
 function client() {
-  const url = (process.env.UPSTASH_REDIS_REST_URL || process.env.KV_REST_API_URL || '').replace(/\/$/, '');
-  const token = process.env.UPSTASH_REDIS_REST_TOKEN || process.env.KV_REST_API_TOKEN;
+     const pick = (re) => Object.entries(process.env).find(([k, v]) => re.test(k) && v)?.[1];
+     const url = (pick(/^(UPSTASH_REDIS_REST_URL|(.+_)?KV_REST_API_URL)$/) || '').replace(/\/$/, '');
+     const token = pick(/^(UPSTASH_REDIS_REST_TOKEN|(.+_)?KV_REST_API_TOKEN)$/);
   if (!url || !token) {
     throw new Error('Falta a base de dados: liga o Upstash Redis ao projeto no Vercel (Storage).');
   }
