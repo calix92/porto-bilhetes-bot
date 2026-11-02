@@ -1,0 +1,14 @@
+{
+  "name": "porto-bilhetes-bot",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Bot de Telegram que avisa quando o FC Porto põe bilhetes à venda",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node test/run-tests.js",
+    "dry-run": "node scripts/dry-run.js"
+  }
+}
